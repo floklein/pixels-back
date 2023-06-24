@@ -8,10 +8,12 @@ import {
 
 const router = Router();
 
+const GRID_SIZE = 50;
+
 const createDefaultGrid = (): Grid => {
   const grid: Grid = {};
-  for (let x = 0; x < 100; x += 1) {
-    for (let y = 0; y < 100; y += 1) {
+  for (let x = 0; x < 50; x += 1) {
+    for (let y = 0; y < 50; y += 1) {
       grid[`${x}-${y}`] = {
         user: Math.random().toString(36).substring(7),
         color: `#${Math.floor(Math.random() * 16777215).toString(16)}`,
