@@ -1,5 +1,10 @@
 import { Router } from "express";
-import { Grid, NewPixel } from "../types/grid";
+import {
+  Coordinates,
+  Grid,
+  CreatePixelBody,
+  DeletePixelBody,
+} from "../types/grid";
 
 const router = Router();
 
@@ -10,12 +15,17 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  console.log(req.body);
-  const body: NewPixel = req.body;
+  const body: CreatePixelBody = req.body;
   grid[body.coordinates] = {
     user: body.user,
     color: body.color,
   };
+  res.sendStatus(200);
+});
+
+router.delete("/", (req, res) => {
+  const body: DeletePixelBody = req.body;
+  delete grid[body.coordinates];
   res.sendStatus(200);
 });
 

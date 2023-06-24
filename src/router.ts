@@ -1,4 +1,4 @@
-import {Router} from "express";
+import { Router } from "express";
 import grid from "./routes/grid";
 
 const router = Router();

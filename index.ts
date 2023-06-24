@@ -2,6 +2,7 @@ import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
 import * as bodyParser from "body-parser";
 import router from "./src/router";
+import cors from "cors";
 
 dotenv.config();
 
@@ -19,6 +20,7 @@ function errorHandler(err: Error, req: Request, res: Response) {
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cors());
 
 app.use("/", router);
 app.use(defaultRoute);
