@@ -47,10 +47,7 @@ router.get("/", (req, res) => {
 
 router.post("/", (req, res) => {
   const body: CreatePixelBody = req.body;
-  grid[body.coordinates] = {
-    user: body.user,
-    color: body.color,
-  };
+  grid[body.coordinates] = body;
   res.sendStatus(200);
 });
 
