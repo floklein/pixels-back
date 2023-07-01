@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { CreatePixelBody, DeletePixelBody, Grid } from "../types/grid";
 import { hsv2rgb, rad2deg, xy2polar } from "../lib/color";
+import { PixelsError } from "../errors";
 
 const router = Router();
 
@@ -45,8 +46,17 @@ router.get("/", (req, res) => {
   res.send(grid);
 });
 
-router.post("/", (req, res) => {
+router.post("/", (req, res, next) => {
   const body: CreatePixelBody = req.body;
+  if (!body.coordinates) {
+    throw new PixelsError("Missing body.coordinates", 400);
+  }
+  if (!body.user) {
+    throw new PixelsError("Missing body.user", 400);
+  }
+  if (!body.color) {
+    throw new PixelsError("Missing body.color", 400);
+  }
   grid[body.coordinates] = body;
   res.sendStatus(200);
 });
